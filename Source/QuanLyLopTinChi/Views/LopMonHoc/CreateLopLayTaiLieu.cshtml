@@ -1,0 +1,323 @@
+﻿@model QuanLyLopTinChi.Models.TaiLieu
+
+@{
+    ViewBag.Title = "Tạo Lớp Môn Học - Thêm Tài Liệu Tham Khảo";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquerymins")
+    <script type="text/javascript">
+
+        $(function () {
+            // Document.ready -> link up remove event handler
+
+            //Ẩn hiện các thẻ div
+            //Tìm kiếm
+            $("#hideTimKiemText").hide();
+            $("#contentTimKiemDiv").hide();
+
+            //Upload
+            $("#hideUploadText").hide();
+            $("#contentUploadDiv").hide();
+
+        });
+        function show(param) {
+            if (param == "TimKiem") {
+                $("#contentTimKiemDiv").show(1000);
+                $("#hideTimKiemText").show(1000);
+                $("#showTimKiemText").hide(1000);
+            }
+            if (param == "Upload") {
+                $("#contentUploadDiv").show(1000);
+                $("#hideUploadText").show(1000);
+                $("#showUploadText").hide(1000);
+            }
+        };
+        function hide(param) {
+            if (param == "TimKiem") {
+                $("#contentTimKiemDiv").hide(1000);
+                $("#hideTimKiemText").hide(1000);
+                $("#showTimKiemText").show(1000);
+            }
+            if (param == "Upload") {
+                $("#contentUploadDiv").hide(1000);
+                $("#hideUploadText").hide(1000);
+                $("#showUploadText").show(1000);
+            }
+        };
+
+        //
+
+        $(".RemoveLink").click(function () {
+            // Get the id from the link
+            var recordToDelete = $(this).attr("data-id");
+
+            if (recordToDelete != '') {
+
+                // Perform the ajax post
+                $.post("/LopMonHoc/XoaKhoiDanhSach", { "idTaiLieu": recordToDelete },
+                function (data) {
+                    // Successful requests get here
+                    // Update the page elements
+                    $('#row-' + data.DeleteId).fadeOut('slow');
+                    if (data.ItemCount == 0) {
+                        $('#rowHeaderTable').fadeOut('slow');
+                    }
+                });
+            }
+        });
+
+    </script>
+}
+
+<h2 class="name">
+    <span class="name_cont">
+        <a href="#">
+            Thêm Tài Liệu Tham Khảo
+        </a>
+    </span><span class="name_last">&nbsp;</span>
+</h2>
+
+<div class="bor pad-sml">
+
+    <h3 class="name show">
+        <a id="showTimKiemText" href="javascript:show('TimKiem');">
+            Hiển Thị Tìm kiếm tài liệu
+        </a>
+        <a id="hideTimKiemText" href="javascript:hide('TimKiem');">
+            Ẩn Tìm kiếm tài liệu
+        </a>
+    </h3>
+
+    <div id="contentTimKiemDiv">
+        @using (Html.BeginForm("LayTaiLieuLe", "LopMonHoc", FormMethod.Post, new { id = "formTaiLieuLe" }))
+        {
+            <table>
+                <tr>
+                    <th>
+                        <div class="editor-label">
+                            Tên tài liệu
+                        </div>
+                    </th>
+                    <td>
+                        <div class="editor-field">
+                            <input type="text" name="TenTaiLieu" />
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        <div class="editor-label">
+                            Người đăng
+                        </div>
+                    </th>
+                    <td>
+                        <div class="editor-field">
+                            @Html.DropDownList("IdNguoiDang",
+                           (IEnumerable<SelectListItem>)ViewBag.NguoiDang,
+                           "Mời chọn người đăng tài liệu",
+                           new { @id = "ListNguoiDangDrop" })
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        <div class="editor-label">
+                            Lớp có chứa tài liệu
+                        </div>
+                    </th>
+                    <td>
+                        <div class="editor-field">
+                            @Html.DropDownList("IdLopMonHoc",
+                           (IEnumerable<SelectListItem>)ViewBag.LopMonHoc,
+                           "Mời chọn lớp",
+                           new { @id = "ListLopDrop" })
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+
+            <input type="submit" value="Tìm Kiếm" />
+        }
+
+
+
+        <h3>Kết quả tìm kiếm tài liệu</h3>
+        <table>
+            <tr id="rowHeaderTableAdd">
+                <th>
+                    @Html.ActionLink("Tên Tài Liệu", "CreateLopLayTaiLieu", new { sortOrder = ViewBag.TenSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Đường Dẫn", "CreateLopLayTaiLieu", new { sortOrder = ViewBag.LinkSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Định Dạng", "CreateLopLayTaiLieu", new { sortOrder = ViewBag.DinhDangSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Dung Lượng", "CreateLopLayTaiLieu", new { sortOrder = ViewBag.DungLuongSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Người Đăng", "CreateLopLayTaiLieu", new { sortOrder = ViewBag.NguoiDangSortParm })
+                </th>
+                <th>
+                    Tùy Chỉnh
+                </th>
+            </tr>
+
+            @foreach (var item in (List<QuanLyLopTinChi.Models.TaiLieu>)ViewBag.ListTaiLieuLe)
+            {
+                <tr id="rowadd-@item.IdTaiLieu">
+                    <td>
+                        @Html.ActionLink(item.TenTaiLieu, "Details", "TaiLieu", new { id = item.IdTaiLieu }, null)
+                    </td>
+                    <td>
+                        @Html.ActionLink(@item.TenTaiLieu,
+                            "DownloadTaiLieu",
+                            "TaiLieu",
+                            new { TenTaiLieu = @item.DuongDan },
+                            null)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DinhDang)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DungLuong)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NguoiDung.HoTen)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Thêm vào danh sách",
+                                "ThemVaoDanhSach",
+                                "LopMonHoc",
+                                new { idTaiLieu = item.IdTaiLieu },
+                                new { @class = "AddLink" })
+                        @*<a href="#" class="AddLink" data-id="@item.IdTaiLieu">Thêm vào danh sách</a>*@
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+<div class="bor pad-sml">
+
+    <h3 class="name show">
+        <a id="showUploadText" href="javascript:show('Upload');">
+            Hiển Thị Upload tài liệu mới
+        </a>
+        <a id="hideUploadText" href="javascript:hide('Upload');">
+            Ẩn Upload tài liệu mới
+        </a>
+    </h3>
+
+    <div id="contentUploadDiv">
+
+        @using (Html.BeginForm("UploadTaiLieu", "LopMonHoc", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <table>
+                <tr>
+                    <th>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.TenTaiLieu)
+                        </div>
+                    </th>
+                    <td>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.TenTaiLieu)
+                            @Html.ValidationMessageFor(model => model.TenTaiLieu)
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.DuongDan)
+                        </div>
+                    </th>
+                    <td>
+                        <div class="editor-field">
+                            <input type="file" name="TaiLieuUpload" />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <p>
+                <input type="submit" name="Submit" value="Upload" />
+            </p>
+
+        }
+    </div>
+</div>
+
+<div class="bor pad-sml">
+    <h3 class="name">Danh sách tài liệu đã chọn</h3>
+    <table>
+        <tr id="rowHeaderTable">
+            <th>
+                @Html.ActionLink("Tên Tài Liệu", "CreateLopLayTaiLieu", new { sortOrder = ViewBag.TenSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Đường Dẫn", "CreateLopLayTaiLieu", new { sortOrder = ViewBag.LinkSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Định Dạng", "CreateLopLayTaiLieu", new { sortOrder = ViewBag.DinhDangSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Dung Lượng", "CreateLopLayTaiLieu", new { sortOrder = ViewBag.DungLuongSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Người Đăng", "CreateLopLayTaiLieu", new { sortOrder = ViewBag.NguoiDangSortParm })
+            </th>
+            <th>
+                Tùy Chỉnh
+            </th>
+        </tr>
+
+        @foreach (var item in (List<QuanLyLopTinChi.Models.TaiLieu>)ViewBag.ListTaiLieu)
+        {
+            <tr id="row-@item.IdTaiLieu">
+                <td>
+                    @Html.ActionLink(item.TenTaiLieu, "Details", "TaiLieu", new { id = item.IdTaiLieu }, null)
+                </td>
+                <td>
+                    @Html.ActionLink(@item.TenTaiLieu,
+                            "DownloadTaiLieu",
+                            "TaiLieu",
+                            new { TenTaiLieu = @item.DuongDan },
+                            null)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DinhDang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DungLuong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NguoiDung.HoTen)
+                </td>
+                <td>
+                    <a href="#" class="RemoveLink" data-id="@item.IdTaiLieu">Xóa khỏi danh sách</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<div class="bor pad-sml">
+    @using (Html.BeginForm())
+    {
+        <div>
+            <input type="submit" value="Thêm Tài Liệu" />
+        </div>
+    }
+</div>

@@ -1,0 +1,98 @@
+﻿@model QuanLyLopTinChi.Models.DiemDanh
+
+@{
+    ViewBag.Title = "Sửa Điểm Danh";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="name">
+    <span class="name_cont">
+        <a href="#">
+            Chỉnh Sửa Điểm Danh
+        </a>
+    </span><span class="name_last">&nbsp;</span>
+</h2>
+<div class="bor pad-sml">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <table>
+            <tr>
+                <th>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.BuoiHoc.LopMonHoc.MaLopMonHoc)
+                    </div>
+                </th>
+                <td>
+                    <div class="editor-field">
+                        @Html.DisplayFor(model => model.BuoiHoc.LopMonHoc.MaLopMonHoc)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.BuoiHoc.NgayHoc)
+                    </div>
+                </th>
+                <td>
+                    <div class="editor-field">
+                        @Html.DisplayFor(model => model.BuoiHoc.NgayHoc)
+                        @Html.HiddenFor(model => model.IdBuoiHoc)
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.NguoiDung.HoTen)
+                    </div>
+                </th>
+                <td>
+                    <div class="editor-field">
+                        @Html.DisplayFor(model => model.NguoiDung.HoTen)
+                        @Html.HiddenFor(model => model.IdNguoiDung)
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.IdTinhTrangDiHoc)
+                    </div>
+                </th>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("IdTinhTrangDiHoc")
+                        @Html.ValidationMessageFor(model => model.IdTinhTrangDiHoc)
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.NhanXet)
+                    </div>
+                </th>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.NhanXet)
+                        @Html.ValidationMessageFor(model => model.NhanXet)
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    }
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>

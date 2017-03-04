@@ -1,0 +1,131 @@
+﻿@model QuanLyLopTinChi.Models.NguoiDung
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="name">
+    <span class="name_cont">
+        <a href="#">
+            Create
+        </a>
+    </span><span class="name_last">&nbsp;</span>
+</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>NguoiDung</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IdNguoiDung)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IdNguoiDung)
+            @Html.ValidationMessageFor(model => model.IdNguoiDung)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DuongDanAnh)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DuongDanAnh)
+            @Html.ValidationMessageFor(model => model.DuongDanAnh)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HoTen)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HoTen)
+            @Html.ValidationMessageFor(model => model.HoTen)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NgaySinh)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NgaySinh)
+            @Html.ValidationMessageFor(model => model.NgaySinh)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.QueQuan)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.QueQuan)
+            @Html.ValidationMessageFor(model => model.QueQuan)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NgayTaoTaiKhoan)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NgayTaoTaiKhoan)
+            @Html.ValidationMessageFor(model => model.NgayTaoTaiKhoan)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IdDonViQuanLy, "DonViQuanLy")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("IdDonViQuanLy", String.Empty)
+            @Html.ValidationMessageFor(model => model.IdDonViQuanLy)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserName)
+            @Html.ValidationMessageFor(model => model.UserName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IdLoaiNguoiDung, "LoaiNguoiDung")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("IdLoaiNguoiDung", String.Empty)
+            @Html.ValidationMessageFor(model => model.IdLoaiNguoiDung)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IdGiaoVien, "GiaoVien")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("IdGiaoVien", String.Empty)
+            @Html.ValidationMessageFor(model => model.IdGiaoVien)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IdSinhVien, "SinhVien")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("IdSinhVien", String.Empty)
+            @Html.ValidationMessageFor(model => model.IdSinhVien)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

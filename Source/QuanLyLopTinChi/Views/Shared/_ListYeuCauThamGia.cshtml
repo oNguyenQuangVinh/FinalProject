@@ -1,0 +1,68 @@
+﻿@model IEnumerable<QuanLyLopTinChi.Models.YeuCauThamGia>
+
+@{
+    Layout = null;
+}
+
+<p>Bạn có: <b style="color: red; font-size: large">@Model.Count()</b> yêu cầu tham gia vào lớp học</p>
+    <table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NguoiDung.DuongDanAnh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NguoiDung.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NguoiDung.HoTen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NguoiDung.IdDonViQuanLy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NguoiDung.NgaySinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NguoiDung.QueQuan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayYeuCau)
+        </th>
+        <th>
+            Lựa chọn
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <a href="~/NguoiDung/Details?id=@item.IdNguoiDung">
+                <img style="width:90px" src="@item.NguoiDung.DuongDanAnh" />
+            </a>
+        </td>
+        <td>
+            @item.NguoiDung.UserName
+        </td>
+        <td>
+            @item.NguoiDung.HoTen
+        </td>
+        <td>
+            @item.NguoiDung.DonViQuanLy.TenDonViQuanLy
+        </td>
+        <td>
+            @item.NguoiDung.NgaySinh
+        </td>
+        <td>
+            @item.NguoiDung.QueQuan
+        </td>
+        <td>
+            @item.NgayYeuCau
+        </td>
+        <td>
+            @Html.ActionLink("Chấp Nhận", "Accept","YeuCauThamGia", new { id=item.IdYeuCauThamGia}, null) |
+            @Html.ActionLink("Từ Chối", "Deny", "YeuCauThamGia", new { id=item.IdYeuCauThamGia },null)
+        </td>
+    </tr>
+}
+
+</table>

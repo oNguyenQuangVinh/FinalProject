@@ -1,0 +1,178 @@
+﻿@model List<QuanLyLopTinChi.Models.BaiLam>
+
+@{
+    ViewBag.Title = "Chấm Điểm Bài Làm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    bool IsDanhDauNopMuon = ((QuanLyLopTinChi.Models.BaiTap)ViewBag.BaiTapCurrent).DanhDauNopMuon;
+}
+
+<h2 class="name">
+    <span class="name_cont">
+        <a href="#">
+            Chấm Điểm Bài Làm
+        </a>
+    </span><span class="name_last">&nbsp;</span>
+</h2>
+
+@using (Html.BeginForm("ChamBai", "BaiLam", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="bor pad-sml">
+
+        <h3 class="name">
+            Chấm Điểm
+        </h3>
+
+        <table>
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    @Html.ActionLink("Họ Tên", "Index", "BaiLam", new { sortOrder = ViewBag.TenSortParm }, null)
+                </th>
+                <th>
+                    @Html.ActionLink("Bài Làm", "Index", "BaiLam", new { sortOrder = ViewBag.BaiLamSortParm }, null)
+                </th>
+                <th>
+                    @Html.ActionLink("Ngày Nộp", "Index", "BaiLam", new { sortOrder = ViewBag.NgayNopSortParm }, null)
+                </th>
+                <th>
+                    @Html.ActionLink("Nộp Muộn", "Index", "BaiLam", new { sortOrder = ViewBag.LopSortParm }, null)
+                </th>
+                <th>
+                    @Html.ActionLink("Điểm", "Index", "BaiLam", new { sortOrder = ViewBag.DiemSortParm }, null)
+                </th>
+                <th>
+                    @Html.ActionLink("Nhận Xét", "Index", "BaiLam", new { sortOrder = ViewBag.NhanXetSortParm }, null)
+                </th>
+            </tr>
+
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                <tr>
+                    <td>
+                        @(i + 1)
+                        @Html.HiddenFor(modelItem => modelItem[i].IdNguoiDung)
+                        @Html.HiddenFor(modelItem => modelItem[i].IdBaiTap)
+                    </td>
+                    <td>
+                        @Model[i].NguoiDung.HoTen
+                    </td>
+                    <td>
+                        @Html.ActionLink("Download",
+                            "DownloadTaiLieu",
+                            "TaiLieu",
+                         new { TenTaiLieu = @Model[i].TaiLieu.DuongDan },
+                            null)
+                    </td>
+                    <td>
+                        @Model[i].NgayNop.ToString("dd'/'MM'/'yyyy")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem[i].NopMuon)
+                        @Html.HiddenFor(modelItem => modelItem[i].NopMuon)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(modelItem => modelItem[i].Diem, new { style = "width: 40px;", @type = "number" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(modelItem => modelItem[i].NhanXet)
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+
+    if (IsDanhDauNopMuon)
+    {
+        <text>
+            <div class="bor pad-sml XuLyMuon">
+
+
+                <h3 class="name">
+                    Xử Lý Nộp Muộn
+
+                </h3>
+
+
+                <table class="noborder">
+                    <tr>
+                        <th>
+                            <div class="editor-label">
+                                Số điểm trừ
+                            </div>
+                        </th>
+
+                        <td>
+                            <div class="editor-field">
+                                @Html.TextBox("DiemTru", "0", new { @type = "number" })
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+
+        </text>
+    }
+
+
+
+    <div class="bor pad-sml">
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </div>
+
+
+}
+
+<div class="bor pad-sml">
+
+    <h3 class="name">
+        <a id="showText" href="javascript:show();">
+            Hiển Thị Bài Làm Đã Chấm
+        </a>
+        <a id="hideText" href="javascript:hide();">
+            Ẩn Bài Làm Đã Chấm
+        </a>
+    </h3>
+    <div id="contentDiv">
+        @Html.Partial("~/Views/Shared/_ListBaiLam.cshtml", (List<QuanLyLopTinChi.Models.BaiLam>)ViewBag.ListBaiLamDaCham)
+        <p>
+            @Html.ActionLink("Chỉnh sửa", "SuaDiem", "BaiLam", new { id = ((QuanLyLopTinChi.Models.BaiTap)ViewBag.BaiTapCurrent).IdBaiTap }, null)
+        </p>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script type="text/javascript">
+        $(function () {
+            // Mặc định ẩn phần tìm kiếm lớp
+            $("#hideText").hide();
+            $("#contentDiv").hide();
+        });
+        function show() {
+            $("#contentDiv").show(1000);
+            $("#hideText").show(1000);
+            $("#showText").hide(1000);
+        };
+        function hide() {
+            $("#contentDiv").hide(1000);
+            $("#hideText").hide(1000);
+            $("#showText").show(1000);
+        };
+
+    </script>
+}

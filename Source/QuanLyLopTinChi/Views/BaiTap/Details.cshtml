@@ -1,0 +1,123 @@
+﻿@model QuanLyLopTinChi.Models.BaiTap
+
+@{
+    ViewBag.Title = "Chi Tiết Bài Tập";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="name">
+    <span class="name_cont">
+        <a href="#">
+            Chi Tiết Bài Tập
+        </a>
+    </span><span class="name_last">&nbsp;</span>
+</h2>
+
+<div class="bor pad-sml">
+    <h3 class="name">Thông Tin Chung</h3>
+    <div class="imgLopDetailGeneral">
+        <img style="width:230px" src="@Model.LopMonHoc.NguoiDung.DuongDanAnh" />
+    </div>
+    <div class="lopDetailGeneral">
+        <p>
+            <b>@Html.DisplayNameFor(model => model.TenBaiTap) : </b> @Html.DisplayFor(model => model.TenBaiTap)
+        </p>
+        @if (@Model.TaiLieu != null)
+        {
+            <text>
+                <p>
+                    <b>@Html.DisplayNameFor(model => model.IdDeBaiTap) : </b> @Html.ActionLink(Model.TaiLieu.DuongDan,
+                                                                                              "DownloadTaiLieu",
+                                                                                              "TaiLieu",
+                                                                                              new { TenTaiLieu = Model.TaiLieu.DuongDan },
+                                                                                              null)
+                </p>
+            </text>
+        }
+        <p>
+            <b>@Html.DisplayNameFor(model => model.ChoPhepXemBai) : </b> @Html.DisplayFor(model => model.ChoPhepXemBai)
+        </p>
+
+        <p>
+            <b>@Html.DisplayNameFor(model => model.ThoiGianBatDau) : </b> @Html.DisplayFor(model => model.ThoiGianBatDau)
+        </p>
+
+        <p>
+            <b>@Html.DisplayNameFor(model => model.ThoiGianNopBai) : </b> @Html.DisplayFor(model => model.ThoiGianNopBai)
+        </p>
+
+        <p>
+            <b>@Html.DisplayNameFor(model => model.MoTaBaiTap) : </b> @Html.DisplayFor(model => model.MoTaBaiTap)
+        </p>
+
+        <br />
+        <br />
+        @if (@Model.ChoPhepGiaHan == true)
+        {
+            <text>
+                <p>
+                    <b>Thông Tin Gia Hạn: </b>
+                </p>
+                <p>
+                    <b>@Html.DisplayNameFor(model => model.ChoPhepGiaHan) : </b> @Html.DisplayFor(model => model.ChoPhepGiaHan)
+                </p>
+
+                <p>
+                    <b>@Html.DisplayNameFor(model => model.SoNgayGiaHan) : </b> @Html.DisplayFor(model => model.SoNgayGiaHan)
+                </p>
+
+                <p>
+                    <b>@Html.DisplayNameFor(model => model.DanhDauNopMuon) : </b> @Html.DisplayFor(model => model.DanhDauNopMuon)
+                </p>
+            </text>
+
+        }
+    </div>
+    <div class="clear-fix"></div>
+    <p>
+
+        @Html.ActionLink("Chỉnh sửa thông tin bài tập", "Edit", "BaiTap", new { id = Model.IdBaiTap }, null) |
+        @Html.ActionLink("Quay lại danh sách", "Index", "BaiTap", null, null)
+    </p>
+</div>
+
+
+<div class="bor pad-sml">
+
+    <h3 class="name show">
+        <a id="showText" href="javascript:show();">
+            Hiển Thị Danh Sách Đã Nộp Bài(@ViewBag.TongSoBaiLam Sinh viên đã nộp)
+        </a>
+        <a id="hideText" href="javascript:hide();">
+            Ẩn Danh Sách Đã Nộp Bài (@ViewBag.TongSoBaiLam Sinh viên đã nộp)
+        </a>
+    </h3>
+    @Html.ActionLink("Chấm Bài", "ChamBai", "BaiLam", new { id = Model.IdBaiTap }, null)
+    <div id="contentDiv">
+        @Html.Partial("~/Views/Shared/_ListBaiLam.cshtml", (List<QuanLyLopTinChi.Models.BaiLam>)ViewBag.ListBaiLam)
+    </div>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script type="text/javascript">
+        $(function () {
+            // Mặc định ẩn phần tìm kiếm lớp
+            $("#hideText").hide();
+            $("#contentDiv").hide();
+        });
+        function show() {
+            $("#contentDiv").show(1000);
+            $("#hideText").show(1000);
+            $("#showText").hide(1000);
+        };
+        function hide() {
+            $("#contentDiv").hide(1000);
+            $("#hideText").hide(1000);
+            $("#showText").show(1000);
+        };
+    </script>
+}

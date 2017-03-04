@@ -1,0 +1,74 @@
+﻿@model QuanLyLopTinChi.Models.BaiLam
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>BaiLam</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NguoiDung.DuongDanAnh)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NguoiDung.DuongDanAnh)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BaiTap.TenBaiTap)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BaiTap.TenBaiTap)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TaiLieu.DuongDan)
+    </div>
+    <div class="display-field">
+        @*@Html.DisplayFor(model => model.TaiLieu.DuongDan)*@
+        @Html.ActionLink(@Model.TaiLieu.TenTaiLieu,
+                            "DownloadTaiLieu",
+                            "TaiLieu",
+                            new { TenTaiLieu = @Model.TaiLieu.DuongDan },
+                            null)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NhanXet)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NhanXet)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Diem)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Diem)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NopMuon)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NopMuon)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NgayNop)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NgayNop)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

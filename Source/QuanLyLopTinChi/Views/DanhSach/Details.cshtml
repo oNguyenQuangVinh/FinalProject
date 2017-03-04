@@ -1,0 +1,44 @@
+﻿@model QuanLyLopTinChi.Models.DanhSach
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>DanhSach</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LopMonHoc.MaLopMonHoc)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LopMonHoc.MaLopMonHoc)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NguoiDung.DuongDanAnh)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NguoiDung.DuongDanAnh)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DiemChuyenCan)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DiemChuyenCan)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DiemThuongXuyen)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DiemThuongXuyen)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

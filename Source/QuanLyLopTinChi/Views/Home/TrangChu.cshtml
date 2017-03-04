@@ -1,0 +1,180 @@
+﻿@model IEnumerable<QuanLyLopTinChi.Models.LopMonHoc>
+@{
+    ViewBag.Title = "Trang Chủ";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script type="text/javascript">
+        $(function () {
+            // Mặc định ẩn phần tìm kiếm lớp
+            $("#hideText").hide();
+            $("#contentDiv").hide();
+
+            $("#monHocList").change(function () {
+                var mID = $(this).val();
+                $.getJSON("../LopMonHoc/LoadHeDaoTaoTheoMonHoc", { IdMonHoc: mID },
+                       function (data) {
+                           var select = $("#heDaoTaoList");
+                           select.empty();
+                           select.append($('<option/>', {
+                               value: 0,
+                               text: "Chọn hệ đào tạo"
+                           }));
+                           $.each(data, function (index, itemData) {
+                               select.append($('<option/>', {
+                                   value: itemData.Value,
+                                   text: itemData.Text
+                               }));
+                           });
+                       });
+            });
+        });
+        function show() {
+            $("#contentDiv").show(1000);
+            $("#hideText").show(1000);
+            $("#showText").hide(1000);
+        };
+        function hide() {
+            $("#contentDiv").hide(1000);
+            $("#hideText").hide(1000);
+            $("#showText").show(1000);
+        };
+    </script>
+}
+
+
+
+
+<h2 class="name">
+    <span class="name_cont">
+        <a href="#">
+            Trang Chủ
+        </a>
+    </span><span class="name_last">&nbsp;</span>
+</h2>
+<div class="bor pad-sml">
+
+    <h3 class="name show">
+        <a id="showText" href="javascript:show();">
+            Hiển Thị Tìm kiếm lớp môn học
+        </a>
+        <a id="hideText" href="javascript:hide();">
+            Ẩn Tìm kiếm lớp môn học
+        </a>
+    </h3>
+
+    <div id="contentDiv">
+        @using (Html.BeginForm("TimKiemLop", "Home", FormMethod.Post, new { id = "formTimKiemLop" }))
+        {
+            <table class="noborder">
+                <tr>
+                    <th>
+                        <div class="editor-label">
+                            Mã Lớp
+                        </div>
+                    </th>
+
+                    <td>
+                        <div class="editor-field">
+                            @Html.TextBox("MaLop")
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        <div class="editor-label">
+                            Môn học
+                        </div>
+                    </th>
+
+                    <td>
+                        <div class="editor-field">
+                            @Html.DropDownList("IdMonHoc",
+                new SelectList(ViewBag.ListMonHoc as System.Collections.IEnumerable, "Value", "Text"),
+                "Chọn môn học", new { id = "monHocList" })
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        <div class="editor-label">
+                            Hệ đào tạo
+                        </div>
+                    </th>
+
+                    <td>
+                        <div class="editor-field">
+                            @Html.DropDownList("IdHeDaoTao",
+                new SelectList(Enumerable.Empty<SelectListItem>(), "Value", "Text"),
+                "Chọn hệ đào tạo", new { id = "heDaoTaoList" })
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        <div class="editor-label">
+                            Người đăng
+                        </div>
+                    </th>
+
+                    <td>
+                        <div class="editor-field">
+                            @Html.DropDownList("IdGiaoVien",
+                           (IEnumerable<SelectListItem>)ViewBag.NguoiDang,
+                           "Mời chọn người đăng tài liệu",
+                           new { @id = "ListNguoiDangDrop" })
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        <div class="editor-label">
+                            Hoạt động
+                        </div>
+                    </th>
+
+                    <td>
+                        <div class="editor-field">
+                            @Html.CheckBox("IsHoatDong", true)
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+            <input type="submit" value="Tìm Kiếm" />
+        }
+
+    </div>
+
+    <div id="ketQuaTimKiemLop" class="listLopView">
+        @if ((List<QuanLyLopTinChi.Models.LopMonHoc>)ViewBag.ListLopTimKiem != null)
+        {
+            <h2>Kết Quả Tìm Kiếm Lớp</h2>
+            @Html.Partial("~/Views/Shared/_ListLopDetailPartial.cshtml", (List<QuanLyLopTinChi.Models.LopMonHoc>)ViewBag.ListLopTimKiem);
+        }
+    </div>
+
+</div>
+
+<div class="bor pad-sml">
+    <div id="danhSachLopTheoNguoiDung">
+        <h3 class="name">Danh Sách Các Lớp Do "<b>@ViewBag.NguoiDungCurrentHoTen</b>" Dạy:</h3>
+        @Html.Partial("~/Views/Shared/_ListLopDetailPartial.cshtml", (List<QuanLyLopTinChi.Models.LopMonHoc>)ViewBag.ListLopTheoNguoiDung)
+    </div>
+</div>
+
+
+<div class="bor pad-sml">
+    <div id=danhSachLopTheoNguoiDung>
+        <h3 class="name">Danh sách lớp môn học được phép truy cập và đang hoạt động</h3>
+        @Html.Partial("~/Views/Shared/_ListLopDetailPartial.cshtml", (List<QuanLyLopTinChi.Models.LopMonHoc>)ViewBag.ListLopDangHoatDong)
+    </div>
+</div>

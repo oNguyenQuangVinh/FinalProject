@@ -1,0 +1,115 @@
+﻿@model QuanLyLopTinChi.Models.BaiTap
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>BaiTap</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IdBaiTap)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdBaiTap)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TenBaiTap)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TenBaiTap)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LopMonHoc.TenLopMonHoc)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LopMonHoc.TenLopMonHoc)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MoTaBaiTap)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MoTaBaiTap)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TaiLieu.DuongDan)
+    </div>
+    <div class="display-field">
+        @*@Html.DisplayFor(model => model.TaiLieu.DuongDan)*@
+        @Html.ActionLink(@Model.TaiLieu.TenTaiLieu,
+                            "DownloadTaiLieu",
+                            "TaiLieu",
+                            new { TenTaiLieu = @Model.TaiLieu.DuongDan },
+                            null)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DinhDangFileBaiLam)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DinhDangFileBaiLam)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DungLuongFileBaiLam)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DungLuongFileBaiLam)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ChoPhepXemBai)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ChoPhepXemBai)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ThoiGianBatDau)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ThoiGianBatDau)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ThoiGianNopBai)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ThoiGianNopBai)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ChoPhepGiaHan)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ChoPhepGiaHan)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SoNgayGiaHan)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SoNgayGiaHan)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DanhDauNopMuon)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DanhDauNopMuon)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

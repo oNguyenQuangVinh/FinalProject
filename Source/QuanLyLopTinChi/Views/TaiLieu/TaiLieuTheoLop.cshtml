@@ -1,0 +1,54 @@
+﻿@model IEnumerable<QuanLyLopTinChi.Models.TaiLieu>
+
+@{
+    ViewBag.Title = "Tài Liệu Theo Lớp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="name">
+    <span class="name_cont">
+        <a href="#">
+            Tài Liệu Theo Lớp
+        </a>
+    </span><span class="name_last">&nbsp;</span>
+</h2>
+
+<p>
+    @Html.ActionLink("Thêm Tài Liệu Vào Lớp", "Create")
+</p>
+
+
+<div class="bor pad-sml">
+
+    <h3 class="name">
+        Tìm Kiếm Tài Liệu Trong Lớp
+    </h3>
+
+ 
+        @using (Html.BeginForm())
+        {
+            <p>
+                <table>
+                    <tr>
+                        <th>
+                            Tìm theo tên tài liệu:
+                        </th>
+                        <th>
+                            @Html.TextBox("TenTaiLieu")
+                        </th>
+                    </tr>
+                </table>
+                <input type="submit" value="Search" />
+            </p>
+        }
+</div>
+
+<div class="bor pad-sml">
+
+    <h3 class="name">
+        Danh Sách Tài Liệu
+    </h3>
+   
+    @Html.Partial("~/Views/Shared/_ListTaiLieu.cshtml", Model)
+
+</div>

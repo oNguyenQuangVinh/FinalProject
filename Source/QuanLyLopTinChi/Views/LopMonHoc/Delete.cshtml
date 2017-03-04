@@ -1,0 +1,62 @@
+﻿@model QuanLyLopTinChi.Models.LopMonHoc
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>LopMonHoc</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MaLopMonHoc)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MaLopMonHoc)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TenLopMonHoc)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TenLopMonHoc)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SoBuoiDiemDanh)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SoBuoiDiemDanh)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ThoiGianBatDau)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ThoiGianBatDau)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ThoiGianKetThuc)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ThoiGianKetThuc)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CongKhai)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CongKhai)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

@@ -1,0 +1,104 @@
+﻿@model QuanLyLopTinChi.Models.NguoiDung
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>NguoiDung</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IdNguoiDung)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdNguoiDung)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DuongDanAnh)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DuongDanAnh)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HoTen)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HoTen)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NgaySinh)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NgaySinh)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.QueQuan)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.QueQuan)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NgayTaoTaiKhoan)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NgayTaoTaiKhoan)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DonViQuanLy.TenDonViQuanLy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DonViQuanLy.TenDonViQuanLy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Password)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Password)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LoaiNguoiDung.TenLoaiNguoiDung)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LoaiNguoiDung.TenLoaiNguoiDung)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.GiaoVien.HocHam)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GiaoVien.HocHam)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SinhVien.IdSinhVien)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SinhVien.IdSinhVien)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

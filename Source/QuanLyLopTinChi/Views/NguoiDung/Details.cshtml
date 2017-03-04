@@ -1,0 +1,57 @@
+﻿@model QuanLyLopTinChi.Models.NguoiDung
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="name">
+    <span class="name_cont">
+        <a href="#">
+            Thông Tin Người Dùng
+        </a>
+    </span><span class="name_last">&nbsp;</span>
+</h2>
+
+<div class="bor pad-sml">
+    <h3 class="name">Thông Tin Chung</h3>
+    <div class="imgLopDetailGeneral">
+        <img style="width:230px" src="@Model.DuongDanAnh" />
+    </div>
+    <div class="lopDetailGeneral">
+        <p>
+            <b>@Html.DisplayNameFor(model => model.UserName) : </b> @Html.DisplayFor(model => model.UserName)
+        </p>
+
+        <p>
+            <b>@Html.DisplayNameFor(model => model.HoTen) : </b> @Html.DisplayFor(model => model.HoTen)
+        </p>
+
+        <p>
+            <b>@Html.DisplayNameFor(model => model.NgaySinh) : </b> @Html.DisplayFor(model => model.NgaySinh)
+        </p>
+
+        <p>
+            <b>@Html.DisplayNameFor(model => model.QueQuan) : </b> @Html.DisplayFor(model => model.QueQuan)
+        </p>
+
+        <p>
+            <b>@Html.DisplayNameFor(model => model.NgayTaoTaiKhoan) : </b> @Html.DisplayFor(model => model.NgayTaoTaiKhoan)
+        </p>
+
+        <p>
+            <b>@Html.DisplayNameFor(model => model.IdDonViQuanLy) : </b> @Html.DisplayFor(model => model.DonViQuanLy.TenDonViQuanLy)
+        </p>
+
+        @if (Session["NguoiDungCurrent"] != null)
+        {
+            QuanLyLopTinChi.Models.NguoiDung NguoiDungCurrent = (QuanLyLopTinChi.Models.NguoiDung)HttpContext.Current.Session["NguoiDungCurrent"];
+            if (NguoiDungCurrent.IdNguoiDung == Model.IdNguoiDung)
+            {
+                <text>
+                    @Html.ActionLink("Chỉnh Sửa", "Edit", "NguoiDung", new { id = Model.IdNguoiDung }, null)
+                </text>
+            }
+        }
+    </div>
+</div>

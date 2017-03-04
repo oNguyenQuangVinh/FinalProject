@@ -1,0 +1,90 @@
+﻿@model IEnumerable<QuanLyLopTinChi.Models.NguoiDung>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DuongDanAnh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoTen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgaySinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QueQuan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayTaoTaiKhoan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DonViQuanLy.TenDonViQuanLy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HocHam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HocVi)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                <img src="@item.DuongDanAnh" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoTen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgaySinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QueQuan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayTaoTaiKhoan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonViQuanLy.TenDonViQuanLy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HocHam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HocVi)
+            </td>
+            <td>
+                @if (Session["NguoiDungCurrent"] != null)
+                {
+                    QuanLyLopTinChi.Models.NguoiDung NguoiDungCurrent = (QuanLyLopTinChi.Models.NguoiDung)HttpContext.Current.Session["NguoiDungCurrent"];
+                    if (NguoiDungCurrent.IdNguoiDung == item.IdNguoiDung)
+                    {
+                        <text>
+                            @Html.ActionLink("Chỉnh Sửa", "Edit","NguoiDung", new { id = item.IdNguoiDung },null)
+                        </text>
+                    }
+                }
+            </td>
+        </tr>
+    }
+
+</table>

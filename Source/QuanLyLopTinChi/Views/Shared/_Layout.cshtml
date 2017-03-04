@@ -1,0 +1,63 @@
+﻿@{
+    bool isLopCuaNguoiDungCurrent = false;
+    if (Session["NguoiDungCurrent"] != null)
+    {
+        QuanLyLopTinChi.Models.NguoiDung NguoiDungCurrent = (QuanLyLopTinChi.Models.NguoiDung)HttpContext.Current.Session["NguoiDungCurrent"];
+        QuanLyLopTinChi.Models.LopMonHoc LopMonHocCurrent = (QuanLyLopTinChi.Models.LopMonHoc)HttpContext.Current.Session["LopMonHocCurrent"];
+        if(NguoiDungCurrent.IdNguoiDung == LopMonHocCurrent.IdNguoiDung)
+        {
+            isLopCuaNguoiDungCurrent = true;
+        }
+        
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/cssjqryUi")
+</head>
+<body>
+    <div id="all">
+        <header>
+            <div class="content-wrapper">
+                <section id="login">
+                    @Html.Partial("_LoginPartial")
+                </section>
+                @Html.Partial("_ImageLogo")
+                @Html.Partial("_Menu")
+            </div>
+        </header>
+        <div id="body">
+            @{
+                if (isLopCuaNguoiDungCurrent)
+                {
+                    @Html.Partial("_FloatRightContent")
+                }
+                else
+                {
+                    @Html.Partial("_FloatRightContentOtherUser")
+                }
+            }
+            <div class="float-left-content">
+                @RenderSection("featured", required: false)
+                <section class="main-content clear-fix">
+                    @RenderBody()
+                </section>
+            </div>
+        </div>
+        <footer>
+            @Html.Partial("_PageInformation")
+        </footer>
+
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+    </div>
+</body>
+</html>

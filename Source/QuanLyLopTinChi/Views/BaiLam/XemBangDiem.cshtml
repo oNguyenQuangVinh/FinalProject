@@ -1,0 +1,31 @@
+﻿@model List<QuanLyLopTinChi.Models.BaiLam>
+
+@{
+    ViewBag.Title = "Xem Bảng Điểm";
+}
+
+<h2 class="name">
+    <span class="name_cont">
+        <a href="#">
+            Bảng Điểm Bài Tập
+        </a>
+    </span><span class="name_last">&nbsp;</span>
+</h2>
+
+<div class="bor pad-sml">
+
+    <h3 class="name">Danh Sách Đã Nộp</h3>
+
+    <div id="contentDiv">
+        @Html.Partial("~/Views/Shared/_ListBaiLam.cshtml", Model)
+    </div>
+</div>
+
+<div class="bor pad-sml">
+
+    <h3 class="name">Danh Sách Chưa Nộp</h3>
+
+    <div id="contentDiv">
+        @Html.Partial("~/Views/Shared/_ListNguoiDung.cshtml", (List<QuanLyLopTinChi.Models.NguoiDung>)ViewBag.ListChuaNopBai)
+    </div>
+</div>

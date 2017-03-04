@@ -1,0 +1,68 @@
+﻿@model QuanLyLopTinChi.Models.TaiLieu
+
+@{
+    ViewBag.Title = "Chi Tiết Tài Liệu";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<h2 class="name">
+    <span class="name_cont">
+        <a href="#">
+            Chi Tiết Tài Liệu
+        </a>
+    </span><span class="name_last">&nbsp;</span>
+</h2>
+
+
+<div class="bor pad-sml">
+    <h3 class="name">Thông Tin Chung</h3>
+    <div class="imgLopDetailGeneral">
+        <img style="width:230px" src="@Model.NguoiDung.DuongDanAnh" />
+    </div>
+    <div class="lopDetailGeneral">
+        <p>
+            <b>@Html.DisplayNameFor(model => model.TenTaiLieu) : </b> @Html.DisplayFor(model => model.TenTaiLieu)
+        </p>
+
+        <p>
+            <b>@Html.DisplayNameFor(model => model.DuongDan) : </b> @Html.ActionLink(Model.TenTaiLieu,
+                                                                    "DownloadTaiLieu",
+                                                                    "TaiLieu",
+                                                                    new { TenTaiLieu = Model.DuongDan },
+                                                                    null)
+        </p>
+
+        <p>
+            <b>@Html.DisplayNameFor(model => model.DinhDang) : </b> @Html.DisplayFor(model => model.DinhDang)
+        </p>
+
+        <p>
+            <b>@Html.DisplayNameFor(model => model.DungLuong) : </b> @Html.DisplayFor(model => model.DungLuong)
+        </p>
+
+        <p>
+            <b>@Html.DisplayNameFor(model => model.NguoiDung.HoTen) Người Đăng: </b> @Html.DisplayFor(model => model.NguoiDung.HoTen)
+        </p>
+
+
+    </div>
+    <div class="clear-fix"></div>
+
+    @if (Session["NguoiDungCurrent"] != null)
+    {
+        QuanLyLopTinChi.Models.NguoiDung NguoiDungCurrent = (QuanLyLopTinChi.Models.NguoiDung)HttpContext.Current.Session["NguoiDungCurrent"];
+        if (NguoiDungCurrent.IdNguoiDung == Model.IdNguoiDung)
+        {
+            <text>
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.IdTaiLieu }) |
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
+
+            </text>
+        }
+    }
+    <p>
+        @Html.ActionLink("Quay lại danh sách", "Index")
+    </p>
+</div>

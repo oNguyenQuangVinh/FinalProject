@@ -1,0 +1,216 @@
+﻿@model QuanLyLopTinChi.Models.LopMonHoc
+
+@{
+    ViewBag.Title = "Tạo Lớp Môn Học - Thông Tin Cơ Bản";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script type="text/javascript">
+        $(function () {
+            $("#monHocList").change(function () {
+                var mID = $(this).val();
+                $.getJSON("../LopMonHoc/LoadHeDaoTaoTheoMonHoc", { IdMonHoc: mID },
+                       function (data) {
+                           var select = $("#heDaoTaoList");
+                           select.empty();
+                           select.append($('<option/>', {
+                               value: 0,
+                               text: "Chọn hệ đào tạo"
+                           }));
+                           $.each(data, function (index, itemData) {
+                               select.append($('<option/>', {
+                                   value: itemData.Value,
+                                   text: itemData.Text
+                               }));
+                           });
+                       });
+            });
+        });
+    </script>
+}
+
+<h2 class="name">
+    <span class="name_cont">
+        <a href="#">
+            Tạo Lớp Môn Học
+        </a>
+    </span><span class="name_last">&nbsp;</span>
+</h2>
+<div class="bor pad-sml">
+    <h3 class="name">Thông Tin Cơ Bản</h3>
+    @using (Html.BeginForm("CreateLopCoBan", "LopMonHoc", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <table class="noborder">
+            <tr>
+                <th>
+                    <div class="editor-label">
+                        <label>
+                            Môn học
+                        </label>
+                    </div>
+                </th>
+
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("IdMonHoc",
+                new SelectList(ViewBag.ListMonHoc as System.Collections.IEnumerable, "Value", "Text"),
+                "Chọn môn học", new { id = "monHocList" })
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <div class="editor-label">
+                        <label>
+                            Hệ đào tạo
+                        </label>
+                    </div>
+                </th>
+
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("IdHeDaoTao",
+                new SelectList(Enumerable.Empty<SelectListItem>(), "Value", "Text"),
+                "Chọn hệ đào tạo", new { id = "heDaoTaoList" })
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.MaLopMonHoc)
+                    </div>
+                </th>
+
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.MaLopMonHoc)
+                        @Html.ValidationMessageFor(model => model.MaLopMonHoc)
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.SoTiet)
+                    </div>
+                </th>
+
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.SoTiet)
+                        @Html.ValidationMessageFor(model => model.SoTiet)
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.SoBuoiDiemDanh)
+                    </div>
+                </th>
+
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.SoBuoiDiemDanh)
+                        @Html.ValidationMessageFor(model => model.SoBuoiDiemDanh)
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ThoiGianBatDau)
+                    </div>
+                </th>
+
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ThoiGianBatDau)
+                        @Html.ValidationMessageFor(model => model.ThoiGianBatDau)
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ThoiGianKetThuc)
+                    </div>
+                </th>
+
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ThoiGianKetThuc)
+                        @Html.ValidationMessageFor(model => model.ThoiGianKetThuc)
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.CongKhai)
+                    </div>
+                </th>
+
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.CongKhai)
+                        @Html.ValidationMessageFor(model => model.CongKhai)
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.IdDeCuongBaiGiang)
+                    </div>
+                </th>
+
+                <td>
+                    <div class="editor-field">
+                        Tên Tài Liệu: @Html.TextBox("TenTaiLieu") <br />
+                        Đường Dẫn: <input type="file" name="DeCuongBaiGiangUpload" />
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <div class="editor-label">
+                        <label>
+                            Chọn bộ tài liệu từ lớp có sẵn
+                        </label>
+                    </div>
+                </th>
+
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("IdLopMonHocTaiLieu",
+                                  (IEnumerable<SelectListItem>)ViewBag.LopMonHoc,
+                                  "Mặc định để trống: Không sử dụng bộ tài liệu từ lớp khác",
+                                  new { @id = "ListLopDrop" })
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <p>
+            <input type="submit" value="Tạo Lớp" />
+        </p>
+    }
+</div>

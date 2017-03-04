@@ -1,0 +1,40 @@
+﻿@model QuanLyLopTinChi.Models.DanhSach
+
+@{
+    ViewBag.Title = "Thêm Sinh Viên Bằng File";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="name">
+    <span class="name_cont">
+        <a href="#">
+            Thêm Sinh Viên Vào Lớp
+        </a>
+    </span><span class="name_last">&nbsp;</span>
+</h2>
+<div class="bor pad-sml">
+    @using (Html.BeginForm("BrowseDanhSach", "DanhSach", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <table>
+            <tr>
+                <td>File:</td>
+                <td>
+                    <input type="file" name="UploadedDanhSach" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" name="Submit" value="Quét file" />
+                </td>
+            </tr>
+        </table>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>

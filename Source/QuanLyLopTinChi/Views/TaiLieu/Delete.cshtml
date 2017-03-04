@@ -1,0 +1,61 @@
+﻿@model QuanLyLopTinChi.Models.TaiLieu
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<h2 class="name">
+    <span class="name_cont">
+        <a href="#">
+            Delete
+        </a>
+    </span><span class="name_last">&nbsp;</span>
+</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>TaiLieu</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TenTaiLieu)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TenTaiLieu)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DuongDan)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DuongDan)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DinhDang)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DinhDang)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DungLuong)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DungLuong)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NguoiDung.DuongDanAnh)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NguoiDung.DuongDanAnh)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

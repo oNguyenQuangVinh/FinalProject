@@ -1,0 +1,137 @@
+﻿@model QuanLyLopTinChi.Models.BaiTap
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>BaiTap</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IdBaiTap)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IdBaiTap)
+            @Html.ValidationMessageFor(model => model.IdBaiTap)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TenBaiTap)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TenBaiTap)
+            @Html.ValidationMessageFor(model => model.TenBaiTap)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IdLopMonHoc, "LopMonHoc")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("IdLopMonHoc", String.Empty)
+            @Html.ValidationMessageFor(model => model.IdLopMonHoc)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MoTaBaiTap)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MoTaBaiTap)
+            @Html.ValidationMessageFor(model => model.MoTaBaiTap)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TaiLieu.DuongDan)
+        </div>
+        <div class="editor-field">
+            @*@Html.EditorFor(model => model.TaiLieu.DuongDan)
+            @Html.ValidationMessageFor(model => model.TaiLieu.DuongDan)*@
+            @Html.ActionLink(@Model.TaiLieu.TenTaiLieu,
+                            "DownloadTaiLieu",
+                            "TaiLieu",
+                            new { TenTaiLieu = @Model.TaiLieu.DuongDan },
+                            null)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DinhDangFileBaiLam)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DinhDangFileBaiLam)
+            @Html.ValidationMessageFor(model => model.DinhDangFileBaiLam)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DungLuongFileBaiLam)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DungLuongFileBaiLam)
+            @Html.ValidationMessageFor(model => model.DungLuongFileBaiLam)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ChoPhepXemBai)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ChoPhepXemBai)
+            @Html.ValidationMessageFor(model => model.ChoPhepXemBai)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ThoiGianBatDau)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ThoiGianBatDau)
+            @Html.ValidationMessageFor(model => model.ThoiGianBatDau)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ThoiGianNopBai)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ThoiGianNopBai)
+            @Html.ValidationMessageFor(model => model.ThoiGianNopBai)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ChoPhepGiaHan)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ChoPhepGiaHan)
+            @Html.ValidationMessageFor(model => model.ChoPhepGiaHan)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SoNgayGiaHan)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SoNgayGiaHan)
+            @Html.ValidationMessageFor(model => model.SoNgayGiaHan)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DanhDauNopMuon)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DanhDauNopMuon)
+            @Html.ValidationMessageFor(model => model.DanhDauNopMuon)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

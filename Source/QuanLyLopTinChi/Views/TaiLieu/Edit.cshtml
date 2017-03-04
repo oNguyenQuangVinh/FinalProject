@@ -1,0 +1,63 @@
+﻿@model QuanLyLopTinChi.Models.TaiLieu
+
+@{
+    ViewBag.Title = "Sửa Thông Tin Tài Liệu";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<h2 class="name">
+    <span class="name_cont">
+        <a href="#">
+            Chỉnh Sửa Điểm Danh
+        </a>
+    </span><span class="name_last">&nbsp;</span>
+</h2>
+<div class="bor pad-sml">
+    @using (Html.BeginForm())
+    {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.IdTaiLieu)
+    <table>
+
+        <tr>
+            <th>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.TenTaiLieu)
+                </div>
+            </th>
+            <td>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.TenTaiLieu)
+                    @Html.ValidationMessageFor(model => model.TenTaiLieu)
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.DuongDan)
+                </div>
+            </th>
+            <td>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.DuongDan)
+                    @Html.ValidationMessageFor(model => model.DuongDan)
+                </div>
+            </td>
+        </tr>
+    </table>
+    <p>
+        <input type="submit" value="Save" />
+    </p>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>

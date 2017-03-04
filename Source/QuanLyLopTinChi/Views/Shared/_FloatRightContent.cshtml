@@ -1,0 +1,63 @@
+﻿<div class="float-right-content">
+    <div class="mar">
+        <div class="bar">
+            <h3 class="name" style=" margin-top: 0px;">
+                <span class="right">Danh mục chức năng</span>
+            </h3>
+            <div class="bar_list">
+                <ul>
+                    <li>
+                        <a href="~/BuoiHoc/ListCacBuoiHocDiemDanh">Điểm Danh</a>
+                        <ul>
+                            <li><a href="~/DiemDanh/DiemDanhMoi">Điểm Danh Mới</a></li>
+                            <li><a href="~/DiemDanh/ThongKeDiemDanh">Thống Kê Điểm Danh</a></li>
+                            <li><a href="~/BuoiHoc/ListCacBuoiHocDiemDanh">Các Buổi Điểm Danh</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="~/TaiLieu/TaiLieuTheoLop">Tài Liệu</a>
+                        <ul>
+                            <li><a href="~/TaiLieu/Create">Thêm Tài Liệu Vào Lớp</a></li>
+                            <li><a href="~/TaiLieu/TaiLieuTheoLop">Danh Sách Tài Liệu</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="~/BaiTap/Index">Bài Tập</a>
+                        <ul>
+                            <li><a href="~/BaiTap/Create">Tạo Bài Tập</a></li>
+                            <li><a href="~/BaiTap/Index">Chấm Điểm Bài Tập</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="~/DanhSach/XemDanhSachSinhVien">Danh Sách Lớp</a>
+                        <ul>
+                            <li><a href="~/DanhSach/XemDanhSachSinhVien">Danh Sách Sinh Viên</a></li>
+                            <li><a href="~/DanhSach/ThemSinhVien">Thêm Sinh Viên</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="~/YeuCauThamGia/Index"
+                        @{
+                            int YeuCauCount = (Int32)HttpContext.Current.Session["YeuCauCount"];
+                            if (YeuCauCount > 0)
+                            {
+                                <text>
+                                    style=" color: #7e3434"
+                                </text>
+                            }
+                        }>
+                        (@YeuCauCount.ToString())
+                        Yêu Cầu Thêm Vào Lớp
+
+                        </a>
+
+                    </li>
+
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

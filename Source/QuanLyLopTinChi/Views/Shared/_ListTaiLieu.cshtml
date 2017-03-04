@@ -1,0 +1,76 @@
+﻿@model IEnumerable<QuanLyLopTinChi.Models.TaiLieu>
+
+@{
+    Layout = null;
+}
+
+<table>
+    <tr>
+        <th>
+            @Html.ActionLink("Tên Tài Liệu", "Index", new { sortOrder = ViewBag.TenSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Đường Dẫn", "Index", new { sortOrder = ViewBag.LinkSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Định Dạng", "Index", new { sortOrder = ViewBag.DinhDangSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Dung Lượng", "Index", new { sortOrder = ViewBag.DungLuongSortParm })  (Kb)
+        </th>
+
+        <th>
+            @Html.ActionLink("Loại Tài Liệu", "Index", new { sortOrder = ViewBag.LoaiTaiLieuSortParm })
+        </th>
+
+        <th>
+            @Html.ActionLink("Người Đăng", "Index", new { sortOrder = ViewBag.NguoiDangSortParm })
+        </th>
+        <th>
+            Tùy Chỉnh
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenTaiLieu)
+            </td>
+            <td>
+                @Html.ActionLink(@item.TenTaiLieu,
+                            "DownloadTaiLieu",
+                            "TaiLieu",
+                            new { TenTaiLieu = @item.DuongDan },
+                            null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DinhDang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DungLuong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoaiTaiLieu.TenLoaiTaiLieu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NguoiDung.HoTen)
+            </td>
+            <td>
+                @Html.ActionLink("Chi Tiết", "Details", "TaiLieu", new { id = item.IdTaiLieu },null)
+
+                @if (Session["NguoiDungCurrent"] != null)
+                {
+                    QuanLyLopTinChi.Models.NguoiDung NguoiDungCurrent = (QuanLyLopTinChi.Models.NguoiDung)HttpContext.Current.Session["NguoiDungCurrent"];
+                    if (NguoiDungCurrent.IdNguoiDung == item.IdNguoiDung)
+                    {
+                        <text>
+                            | @Html.ActionLink("Sửa", "Edit","TaiLieu", new { id = item.IdTaiLieu },null)
+                        </text>
+                    }
+                }
+            </td>
+        </tr>
+    }
+
+</table>

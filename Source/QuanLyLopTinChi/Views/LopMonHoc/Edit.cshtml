@@ -1,0 +1,79 @@
+﻿@model QuanLyLopTinChi.Models.LopMonHoc
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>LopMonHoc</legend>
+
+        @Html.HiddenFor(model => model.IdLopMonHoc)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MaLopMonHoc)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MaLopMonHoc)
+            @Html.ValidationMessageFor(model => model.MaLopMonHoc)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TenLopMonHoc)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TenLopMonHoc)
+            @Html.ValidationMessageFor(model => model.TenLopMonHoc)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SoBuoiDiemDanh)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SoBuoiDiemDanh)
+            @Html.ValidationMessageFor(model => model.SoBuoiDiemDanh)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ThoiGianBatDau)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ThoiGianBatDau)
+            @Html.ValidationMessageFor(model => model.ThoiGianBatDau)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ThoiGianKetThuc)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ThoiGianKetThuc)
+            @Html.ValidationMessageFor(model => model.ThoiGianKetThuc)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CongKhai)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CongKhai)
+            @Html.ValidationMessageFor(model => model.CongKhai)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

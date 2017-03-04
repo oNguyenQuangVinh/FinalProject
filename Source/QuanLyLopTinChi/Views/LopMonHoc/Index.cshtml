@@ -1,0 +1,23 @@
+﻿@model IEnumerable<QuanLyLopTinChi.Models.LopMonHoc>
+
+@{
+    ViewBag.Title = "Danh Sách Tất Cả Các Lớp";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<h2 class="name">
+    <span class="name_cont">
+        <a href="#">
+            Danh sách tất cả các lớp môn học
+        </a>
+    </span><span class="name_last">&nbsp;</span>
+</h2>
+
+
+
+<div class="bor pad-sml">
+    <p>
+        @Html.ActionLink("Tạo mới", "Create")
+    </p>
+    @Html.Partial("~/Views/Shared/_ListLopDetailPartial.cshtml", Model)
+</div>

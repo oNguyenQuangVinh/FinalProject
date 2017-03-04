@@ -1,0 +1,54 @@
+﻿@model IEnumerable<QuanLyLopTinChi.Models.LopMonHoc>
+
+@{
+    Layout = null;
+}
+
+@foreach (var item in Model)
+{
+    <div class="wap-x33" title="Thời gian bắt đầu: @item.ThoiGianBatDau.ToString("dd'/'MM'/'yyyy")
+Thời gian kết thúc @item.ThoiGianKetThuc.ToString("dd'/'MM'/'yyyy")
+Số buổi điểm danh @item.SoBuoiDiemDanh
+Số tiết @item.SoTiet " href=" ~ />LopMonHoc/Details?id=@item.IdLopMonHoc">
+        <div class="pro_list">
+            <div class="img">
+
+                @*@if (Session["NguoiDungCurrent"] != null)
+                {
+                    QuanLyLopTinChi.Models.NguoiDung NguoiDungCurrent = (QuanLyLopTinChi.Models.NguoiDung)HttpContext.Current.Session["NguoiDungCurrent"];
+                    if (item.IdNguoiDung != NguoiDungCurrent.IdNguoiDung)
+                    {
+                        <text>*@
+                            <a href="~/LopMonHoc/Details?id=@item.IdLopMonHoc">
+                                <img src="@item.NguoiDung.DuongDanAnh" />
+                            </a>
+                        @*</text>
+                    }
+                }*@
+
+            </div>
+            <h3>
+                <b>Mã Lớp: </b>
+                <a href="~/LopMonHoc/Details?id=@item.IdLopMonHoc">
+                    @item.MaLopMonHoc
+                </a>
+            </h3>
+            <h3>
+                <a href="~/LopMonHoc/Details?id=@item.IdLopMonHoc">
+                    @item.MonHoc_HeDaoTao.MonHoc.TenMonHoc
+                </a>
+            </h3>
+            <h3>
+                <a href="~/LopMonHoc/Details?id=@item.IdLopMonHoc">
+                    @item.MonHoc_HeDaoTao.HeDaoTao.TenHeDaoTao
+                </a>
+            </h3>
+            <h3>
+                <a href="~/LopMonHoc/Details?id=@item.IdLopMonHoc">
+                    @item.NguoiDung.HoTen
+                </a>
+            </h3>
+        </div>
+        </div>
+}
+<div class="clear-fix"></div>

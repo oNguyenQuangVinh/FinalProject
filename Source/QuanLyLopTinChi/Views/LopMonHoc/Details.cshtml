@@ -1,0 +1,234 @@
+﻿@model QuanLyLopTinChi.Models.LopMonHoc
+
+@{
+    ViewBag.Title = "Chi Tiết Lớp Môn Học";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="name">
+    <span class="name_cont">
+        <a href="#">
+            Chi Tiết Lớp Môn Học
+        </a>
+    </span><span class="name_last">&nbsp;</span>
+</h2>
+
+<div class="bor pad-sml">
+    <h3 class="name show">
+        <a id="showTextDetail" href="javascript:showDetail();">
+            Hiện Thông Tin Chung
+        </a>
+        <a id="hideTextDetail" href="javascript:hideDetail();">
+            Ẩn Thông Tin Chung
+        </a>
+    </h3>
+
+    <div @if (Session["NguoiDungCurrent"] != null) { QuanLyLopTinChi.Models.NguoiDung NguoiDungCurrent = (QuanLyLopTinChi.Models.NguoiDung)HttpContext.Current.Session["NguoiDungCurrent"]; if (Model.IdNguoiDung == NguoiDungCurrent.IdNguoiDung) { <text>
+         id="contentDetailDiv"
+         </text>  } }>
+
+        <div class="imgLopDetailGeneral">
+            <img style="width:230px" src="@Model.NguoiDung.DuongDanAnh" />
+        </div>
+        <div class="lopDetailGeneral">
+            <p>
+                <b>@Html.DisplayNameFor(model => model.MaLopMonHoc) : </b> @Html.DisplayFor(model => model.MaLopMonHoc)
+            </p>
+
+            <p>
+                <b>@Html.DisplayNameFor(model => model.TenLopMonHoc) : </b> @Html.DisplayFor(model => model.TenLopMonHoc)
+            </p>
+
+            <p>
+                <b>@Html.DisplayNameFor(model => model.SoBuoiDiemDanh) : </b> @Html.DisplayFor(model => model.SoBuoiDiemDanh)
+            </p>
+
+            <p>
+                <b>@Html.DisplayNameFor(model => model.SoTiet) : </b> @Html.DisplayFor(model => model.SoTiet)
+            </p>
+
+            <p>
+                <b>@Html.DisplayNameFor(model => model.ThoiGianBatDau) : </b> @Html.DisplayFor(model => model.ThoiGianBatDau)
+            </p>
+
+            <p>
+                <b>@Html.DisplayNameFor(model => model.ThoiGianKetThuc) : </b> @Html.DisplayFor(model => model.ThoiGianKetThuc)
+            </p>
+
+            <p>
+                <b>@Html.DisplayNameFor(model => model.IdDeCuongBaiGiang) : </b> @Html.ActionLink(@Model.TaiLieu.TenTaiLieu,
+                                                                                "Details",
+                                                                                "TaiLieu",
+                                                                                new { id = @Model.TaiLieu.IdTaiLieu },
+                                                                                null)
+            </p>
+
+            <p>
+                <b>@Html.DisplayNameFor(model => model.NguoiDung.HoTen) Giáo Viên: </b> @Html.DisplayFor(model => model.NguoiDung.HoTen)
+            </p>
+
+            @if (Session["NguoiDungCurrent"] != null)
+            {
+                QuanLyLopTinChi.Models.NguoiDung NguoiDungCurrent = (QuanLyLopTinChi.Models.NguoiDung)HttpContext.Current.Session["NguoiDungCurrent"];
+                if (Model.IdNguoiDung == NguoiDungCurrent.IdNguoiDung)
+                {
+                    <text>
+                        <p>
+                            <b>@Html.DisplayNameFor(model => model.CongKhai) : </b> @Html.DisplayFor(model => model.CongKhai)
+                        </p>
+                    </text>
+                }
+            }
+        </div>
+        <div class="clear-fix"></div>
+        <p>
+            @if (Session["NguoiDungCurrent"] != null)
+            {
+                QuanLyLopTinChi.Models.NguoiDung NguoiDungCurrent = (QuanLyLopTinChi.Models.NguoiDung)HttpContext.Current.Session["NguoiDungCurrent"];
+                if (Model.IdNguoiDung == NguoiDungCurrent.IdNguoiDung)
+                {
+                    <text>
+                        @Html.ActionLink("Chỉnh sửa thông tin lớp", "Edit", new { id = Model.IdLopMonHoc }) |
+                    </text>
+                }
+            }
+            @Html.ActionLink("Quay lại danh sách", "Index")
+        </p>
+    </div>
+
+</div>
+
+<div class="bor pad-sml">
+    <h3 class="name">Chi Tiết Tài Liệu Theo Lớp</h3>
+
+    @if (Session["NguoiDungCurrent"] != null)
+    {
+        QuanLyLopTinChi.Models.NguoiDung NguoiDungCurrent = (QuanLyLopTinChi.Models.NguoiDung)HttpContext.Current.Session["NguoiDungCurrent"];
+        if (Model.IdNguoiDung == NguoiDungCurrent.IdNguoiDung)
+        {
+            <text>
+                <p>
+                    @Html.ActionLink("Tạo Mới Tài Liệu", "Create", "TaiLieu")
+                </p>
+            </text>
+        }
+    }
+
+
+    @Html.Partial("~/Views/Shared/_ListTaiLieu.cshtml", (List<QuanLyLopTinChi.Models.TaiLieu>)ViewBag.TaiLieuTheoLop)
+
+</div>
+
+
+<div class="bor pad-sml">
+    <h3 class="name">Danh Sách Các Buổi Học</h3>
+
+    @if (Session["NguoiDungCurrent"] != null)
+    {
+        QuanLyLopTinChi.Models.NguoiDung NguoiDungCurrent = (QuanLyLopTinChi.Models.NguoiDung)HttpContext.Current.Session["NguoiDungCurrent"];
+        if (Model.IdNguoiDung == NguoiDungCurrent.IdNguoiDung)
+        {
+            <text>
+                <p>
+                    @Html.ActionLink("Tạo Mới Điểm Danh", "DiemDanhMoi", "DiemDanh")
+                </p>
+            </text>
+        }
+    }
+
+    @Html.Partial("~/Views/Shared/_ListBuoiHoc.cshtml", (List<QuanLyLopTinChi.Models.BuoiHoc>)ViewBag.ListBuoiHocTheoLop)
+
+</div>
+
+
+@if (Session["NguoiDungCurrent"] != null)
+{
+    QuanLyLopTinChi.Models.NguoiDung NguoiDungCurrent = (QuanLyLopTinChi.Models.NguoiDung)HttpContext.Current.Session["NguoiDungCurrent"];
+    if (Model.IdNguoiDung == NguoiDungCurrent.IdNguoiDung)
+    {
+        <text>
+            <div class="bor pad-sml">
+
+                <h3 class="name">
+                    Danh Sách Bài Tập
+                </h3>
+
+                <div>
+                    <p>
+                        @Html.ActionLink("Thêm Bài Tập", "Create", "BaiTap")
+                    </p>
+                    @Html.Partial("~/Views/Shared/_ListBaiTap.cshtml", (List<QuanLyLopTinChi.Models.BaiTap>)ViewBag.ListBaiTapTheoLop)
+                </div>
+            </div>
+        </text>
+    }
+}
+
+
+<div class="bor pad-sml">
+
+    <h3 class="name show">
+        <a id="showText" href="javascript:show();">
+            Hiển Thị Danh Sách Sinh Viên (@ViewBag.TongSoSinhVien Sinh Viên)
+        </a>
+        <a id="hideText" href="javascript:hide();">
+            Ẩn Danh Sách Sinh Viên (@ViewBag.TongSoSinhVien Sinh Viên)
+        </a>
+    </h3>
+
+    <div id="contentDiv">
+
+        @if (Session["NguoiDungCurrent"] != null)
+        {
+            QuanLyLopTinChi.Models.NguoiDung NguoiDungCurrent = (QuanLyLopTinChi.Models.NguoiDung)HttpContext.Current.Session["NguoiDungCurrent"];
+            if (Model.IdNguoiDung == NguoiDungCurrent.IdNguoiDung)
+            {
+                <text>
+                    <p>
+                        @Html.ActionLink("Thêm Sinh Viên", "ThemSinhVien", "DanhSach")
+                    </p>
+                </text>
+            }
+        }
+
+        @Html.Partial("~/Views/Shared/_ListDanhSach.cshtml", (List<QuanLyLopTinChi.Models.NguoiDung>)ViewBag.ListDanhSachTheoLop)
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script type="text/javascript">
+        $(function () {
+            // Mặc định ẩn phần danh sách lớp
+            $("#hideText").hide();
+            $("#contentDiv").hide();
+
+            // Mặc định ẩn phần thông tin chung
+            $("#hideTextDetail").hide();
+            $("#contentDetailDiv").hide();
+        });
+        function show() {
+            $("#contentDiv").show(1000);
+            $("#hideText").show(1000);
+            $("#showText").hide(1000);
+        };
+        function hide() {
+            $("#contentDiv").hide(1000);
+            $("#hideText").hide(1000);
+            $("#showText").show(1000);
+        };
+
+        function showDetail() {
+            $("#contentDetailDiv").show(1000);
+            $("#hideTextDetail").show(1000);
+            $("#showTextDetail").hide(1000);
+        };
+        function hideDetail() {
+            $("#contentDetailDiv").hide(1000);
+            $("#hideTextDetail").hide(1000);
+            $("#showTextDetail").show(1000);
+        };
+    </script>
+}

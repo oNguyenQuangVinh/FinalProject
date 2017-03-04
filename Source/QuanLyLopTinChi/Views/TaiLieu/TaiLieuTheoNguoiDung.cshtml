@@ -1,0 +1,26 @@
+﻿@model IEnumerable<QuanLyLopTinChi.Models.TaiLieu>
+
+@{
+    ViewBag.Title = "Tài Liệu Theo Người Dùng";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<h2 class="name">
+    <span class="name_cont">
+        <a href="#">
+            Danh Sách Tài Liệu
+        </a>
+    </span><span class="name_last">&nbsp;</span>
+</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+<div class="bor pad-sml">
+    <h3 class="name">
+        Tài Liệu Theo Người Dùng
+    </h3>
+    @Html.Partial("~/Views/Shared/_ListTaiLieu.cshtml", Model)
+</div>

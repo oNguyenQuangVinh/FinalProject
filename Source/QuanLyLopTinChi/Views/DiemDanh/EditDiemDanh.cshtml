@@ -1,0 +1,78 @@
+﻿@model List<QuanLyLopTinChi.Models.DiemDanh>
+
+@{
+    ViewBag.Title = "Chỉnh Sửa Điểm Danh";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="name">
+    <span class="name_cont">
+        <a href="#">
+            Chỉnh Sửa Điểm Danh
+        </a>
+    </span><span class="name_last">&nbsp;</span>
+</h2>
+<div class="bor pad-sml">
+    @using (Html.BeginForm("EditDiemDanh", "DiemDanh", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        <table>
+            <tr>
+                <th>
+                    @Html.ActionLink("Mã Sinh Viên", "XemDanhSachSinhVien", new { sortOrder = ViewBag.MaSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Họ Tên", "XemDanhSachSinhVien", new { sortOrder = ViewBag.TenSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Ngày Sinh", "XemDanhSachSinhVien", new { sortOrder = ViewBag.NgaySinhSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Lớp", "XemDanhSachSinhVien", new { sortOrder = ViewBag.LopSortParm })
+                </th>
+                <th>
+                    Tình Trạng Đi Học
+                </th>
+                <th>
+                    Nhận Xét
+                </th>
+                <th>
+                    Tùy Chọn
+                </th>
+            </tr>
+
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model[i].NguoiDung.UserName, new { @readonly = "readonly", @class = "listEditUserName" })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model[i].NguoiDung.HoTen, new { @readonly = "readonly", @class = "listEditTen" })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model[i].NguoiDung.NgaySinh, new { @readonly = "readonly", @class = "listEditNgaySinh" })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model[i].NguoiDung.DonViQuanLy.TenDonViQuanLy, new { @readonly = "readonly", @class = "listEditLop" })
+                    </td>
+                    <td>
+                        @*@Html.DropDownListFor(modelItem => Model[i].IdTinhTrangDiHoc,
+                            (IEnumerable<SelectListItem>)ViewBag.ListTrangThai)*@
+
+                        @Html.DisplayFor(modelItem => Model[i].TinhTrangDiHoc.NoiDung)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model[i].NhanXet, new { @class = "listEditNhanXet" })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Chỉnh Sửa", "Edit", new { idbuoihoc = Model[i].IdBuoiHoc, idnguoidung = @Model[i].IdNguoiDung })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+    @Html.ActionLink("Quay lại thống kê", "ThongKeDiemDanh", "DiemDanh", null, null)
+</div>

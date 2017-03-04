@@ -1,0 +1,19 @@
+﻿@model IEnumerable<QuanLyLopTinChi.Models.NguoiDung>
+
+@{
+    ViewBag.Title = "Xem Danh Sách Sinh Viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="name">
+    <span class="name_cont">
+        <a href="#">
+            Danh Sách Sinh Viên
+        </a>
+    </span><span class="name_last">&nbsp;</span>
+</h2>
+<div class="bor pad-sml">
+    <b>Tổng số: <a class="RecordNumber"> @ViewBag.TongSoSinhVien</a> Sinh viên</b>
+    @Html.Partial("~/Views/Shared/_ListDanhSach.cshtml", (List<QuanLyLopTinChi.Models.NguoiDung>)ViewBag.DanhSach)
+
+</div>

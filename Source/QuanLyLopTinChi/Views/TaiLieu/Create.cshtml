@@ -1,0 +1,80 @@
+﻿@model QuanLyLopTinChi.Models.TaiLieu
+
+@{
+    ViewBag.Title = "Tạo Tài Liệu";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<h2 class="name">
+    <span class="name_cont">
+        <a href="#">
+            Upload Tài Liệu
+        </a>
+    </span><span class="name_last">&nbsp;</span>
+</h2>
+<div class="bor pad-sml">
+
+    @using (Html.BeginForm("Create", "TaiLieu", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <table>
+            <tr>
+                <th>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.TenTaiLieu)
+                    </div>
+                </th>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.TenTaiLieu)
+                        @Html.ValidationMessageFor(model => model.TenTaiLieu)
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.DuongDan)
+                    </div>
+                </th>
+                <td>
+                    <div class="editor-field">
+                        <input type="file" name="TaiLieuUpload" />
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.IdLoaiTaiLieu)
+                    </div>
+                </th>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.IdLoaiTaiLieu,
+                         (IEnumerable<SelectListItem>)ViewBag.ListLoaiTaiLieu)
+                        @Html.ValidationMessageFor(model => model.IdLoaiTaiLieu)
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+
+        <p>
+            <input type="submit" name="Submit" value="Upload" />
+        </p>
+
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>

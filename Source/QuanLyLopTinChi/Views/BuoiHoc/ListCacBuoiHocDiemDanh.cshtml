@@ -1,0 +1,25 @@
+﻿@model List<QuanLyLopTinChi.Models.BuoiHoc>
+
+@{
+    ViewBag.Title = "Danh Sách Các Buổi Học Đã Điểm Danh";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="name">
+    <span class="name_cont">
+        <a href="#">
+            Danh Sách Các Buổi Điểm Danh
+        </a>
+    </span><span class="name_last">&nbsp;</span>
+</h2>
+
+
+<div class="bor pad-sml">
+    <h3 class="name">Danh Sách Các Buổi Học</h3>
+    @Html.Partial("~/Views/Shared/_ListBuoiHoc.cshtml", Model)
+
+</div>
+
+<p>
+    @Html.ActionLink("Tạo Mới Điểm Danh", "DiemDanhMoi", "DiemDanh")
+</p>

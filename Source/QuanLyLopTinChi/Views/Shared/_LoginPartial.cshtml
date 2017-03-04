@@ -1,0 +1,18 @@
+﻿@if (Session["NguoiDungCurrent"] != null)
+{
+    QuanLyLopTinChi.Models.NguoiDung NguoiDungCurrent = (QuanLyLopTinChi.Models.NguoiDung)HttpContext.Current.Session["NguoiDungCurrent"];
+    string XinChao = "Xin chào, " + NguoiDungCurrent.HoTen;
+    @Html.ActionLink(XinChao, "Details", "NguoiDung", new { id = NguoiDungCurrent.IdNguoiDung }, null)
+    <text>
+
+        @Html.ActionLink("Đăng Xuất", "Logoff", "NguoiDung", new { id = NguoiDungCurrent.IdNguoiDung }, null)
+
+    </text>
+}
+else
+{
+    <ul>
+        <li>@Html.ActionLink("Đăng nhập", "Login", "NguoiDung", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Đăng ký", "Register", "NguoiDung", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+    </ul>
+}

@@ -1,0 +1,41 @@
+﻿@model List<QuanLyLopTinChi.Models.BuoiHoc>
+
+@{
+    Layout = null;
+}
+<div class="scrollable-table">
+    <table class="table table-striped table-header-rotated">
+        <tr>
+            <th>
+                Buổi Học
+            </th>
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                <th>
+                    @Html.ActionLink((i + 1).ToString(),
+                                "EditDiemDanh", "DiemDanh",
+                             new { id = Model[i].IdBuoiHoc }, null)
+                </th>
+
+            }
+        </tr>
+
+        <tr>
+            <th>
+                Ngày Học
+            </th>
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                <th class="rotate-45">
+                    <span>
+                        @Html.ActionLink(Model[i].NgayHoc.ToString("dd'/'MM'/'yyyy"),
+                                "EditDiemDanh", "DiemDanh",
+                             new { id = Model[i].IdBuoiHoc }, new { @style = "padding-left: 12px; padding-top: 9px;"})
+                    </span>
+                </th>
+            }
+        </tr>
+
+    </table>
+
+ </div>

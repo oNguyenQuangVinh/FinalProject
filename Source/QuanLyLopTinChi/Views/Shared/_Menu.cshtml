@@ -1,0 +1,53 @@
+﻿<div id="menu">
+    <div class="wap-x80">
+        <ul id="nav">
+            <li> <a href="~/Home/TrangChu">Trang chủ</a> </li>
+            @*<li>
+                <a href="#">Thông Báo</a>
+                <ul>
+                    <li><a href="javascript:void(0)">Giới thiệu chung</a></li>
+                    <li><a href="javascript:void(0)">Giới thiệu riêng</a></li>
+                </ul>
+            </li>*@
+            <li>
+                <a href="~/LopMonHoc/Index">Lớp Môn Học</a>
+                <ul>
+                    <li><a href="~/LopMonHoc/CreateLopCoBan">Tạo Lớp Môn Học</a></li>
+                    <li><a href="~/LopMonHoc/Index">Danh Sách Tất Cả Lớp</a></li>
+                    <li><a href="~/LopMonHoc/DanhSachTheoNguoiDung">Lớp Đang Dạy</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="~/TaiLieu/Index">Tài Liệu</a>
+                <ul>
+                    <li><a href="~/TaiLieu/Create">Upload Tài Liệu</a></li>
+                    <li><a href="~/TaiLieu/Index">Danh Sách Tài Liệu</a></li>
+                    <li><a href="~/TaiLieu/TaiLieuTheoNguoiDung">Tài Liệu Đã Tạo</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="~/TaiLieu/Index">Người Dùng</a>
+                <ul>
+                    <li><a href="~/TaiLieu/Create">Thông Tin Giáo Viên</a></li>
+                    <li><a href="~/TaiLieu/Index">Thông Tin Sinh Viên</a></li>
+                    <li><a href="~/TaiLieu/DanhSachTheoNguoiDung">Tìm Kiếm Người Dùng</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="~/TaiLieu/Index">Tìm Kiếm</a>
+            </li>
+            @*<li><a href="#">Tin tức</a> </li>
+                <li><a href="#">Hướng dẫn bảo quản</a> </li>
+                <li><a href="#">Liên hệ bán buôn</a> </li>*@
+        </ul>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="wap-x20 align-rgt">
+        <asp:Panel ID="PanelSrc" runat="server" Visible="true">
+            <asp:Button ID="btnsrc" Text="Tìm" runat="server" OnClick="btn_src" Width="38px" />
+        </asp:Panel>
+    </div>
+    <div class="clear">
+    </div>
+</div>

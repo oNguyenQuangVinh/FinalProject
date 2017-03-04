@@ -1,0 +1,33 @@
+﻿@model IEnumerable<QuanLyLopTinChi.Models.YeuCauThamGia>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    string message = TempData["Message"] as string;
+    if (!String.IsNullOrEmpty(message))
+    {
+        <div>
+            @message;
+        </div>
+    }
+}
+
+<h2 class="name">
+    <span class="name_cont">
+        <a href="#">
+            Danh Sách Yêu Cầu
+        </a>
+    </span><span class="name_last">&nbsp;</span>
+</h2>
+<div class="bor pad-sml">
+
+    <h3 class="name">
+        Danh Sách
+    </h3>
+
+    @Html.Partial("~/Views/Shared/_ListYeuCauThamGia.cshtml", Model)
+
+</div>

@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Thêm Sinh Viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="name">
+    <span class="name_cont">
+        <a href="#">
+            Thêm Sinh Viên
+        </a>
+    </span><span class="name_last">&nbsp;</span>
+</h2>
+
+<div class="bor pad-sml">
+    <h3 class="name">Chọn Phương Thức</h3>
+
+    <p>Mời chọn phương thức thêm sinh viên vào lớp ! </p>
+
+    <input id="ThemSinhVienThuCong" type="button" value="Thủ Công" />
+    <input id="BrowseDanhSach" type="button" value="File Danh Sách" />
+
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+
+            $('#ThemSinhVienThuCong').click(function (e) {
+                location.href = '@Url.Content("~/DanhSach/ThemSinhVienThuCong/")';
+            });
+
+            $('#BrowseDanhSach').click(function (e) {
+                location.href = '@Url.Content("~/DanhSach/BrowseDanhSach/")';
+            });
+
+        });
+    </script>
+}

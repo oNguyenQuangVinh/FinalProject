@@ -1,0 +1,202 @@
+﻿@model QuanLyLopTinChi.Models.BaiTap
+
+@{
+    ViewBag.Title = "Tạo Bài Tập";
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(function () {
+            $(".SoNgayGiaHanLine").hide();
+            $(".DanhDauNopMuonLine").hide();
+
+            $("#ChoPhepGiaHan").click(function () {
+                if ($(this).is(':checked')) {
+                    $(".SoNgayGiaHanLine").show();
+                    $(".DanhDauNopMuonLine").show();
+                    $("#SoNgayGiaHan").val('0');
+                    $('#DanhDauNopMuon').prop('checked', true);
+                }
+                else {
+                    $(".SoNgayGiaHanLine").hide();
+                    $('.DanhDauNopMuonLine').hide();
+                    $("#SoNgayGiaHan").val('0');
+                    $('#DanhDauNopMuon').prop('checked', false);
+                }
+            });
+        });
+    </script>
+}
+
+
+
+
+<h2 class="name">
+    <span class="name_cont">
+        <a href="#">
+            Tạo Bài Tập
+        </a>
+    </span><span class="name_last">&nbsp;</span>
+</h2>
+@using (Html.BeginForm("Create", "BaiTap", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="bor pad-sml">
+        <h3 class="name">Thông Tin Cơ Bản</h3>
+
+
+
+        <table class="noborder">
+            <tr>
+                <th>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.TenBaiTap)
+                    </div>
+                </th>
+
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.TenBaiTap)
+                        @Html.ValidationMessageFor(model => model.TenBaiTap)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.MoTaBaiTap)
+                    </div>
+                </th>
+
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.MoTaBaiTap)
+                        @Html.ValidationMessageFor(model => model.MoTaBaiTap)
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <div class="editor-label">
+                        Đề Bài Tập
+                    </div>
+                </th>
+
+                <td>
+                    <div class="editor-field">
+                        Tên Tài Liệu: @Html.TextBox("TenTaiLieu") <br />
+                        Đường Dẫn: <input type="file" name="DeBaiTapUpload" />
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ChoPhepXemBai)
+                    </div>
+                </th>
+
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ChoPhepXemBai)
+                        @Html.ValidationMessageFor(model => model.ChoPhepXemBai)
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ThoiGianBatDau)
+                    </div>
+                </th>
+
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ThoiGianBatDau)
+                        @Html.ValidationMessageFor(model => model.ThoiGianBatDau)
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ThoiGianNopBai)
+                    </div>
+                </th>
+
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ThoiGianNopBai)
+                        @Html.ValidationMessageFor(model => model.ThoiGianNopBai)
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+    <div class="bor pad-sml">
+        <h3 class="name">Thông Tin Gia Hạn Nộp</h3>
+
+        <table>
+
+            <tr>
+                <th>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ChoPhepGiaHan)
+                    </div>
+                </th>
+
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ChoPhepGiaHan)
+                        @Html.ValidationMessageFor(model => model.ChoPhepGiaHan)
+                    </div>
+                </td>
+            </tr>
+            <tr class="SoNgayGiaHanLine">
+                <th>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.SoNgayGiaHan)
+                    </div>
+                </th>
+
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.SoNgayGiaHan)
+                        @Html.ValidationMessageFor(model => model.SoNgayGiaHan)
+                    </div>
+                </td>
+            </tr>
+
+            <tr class="DanhDauNopMuonLine">
+                <th>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.DanhDauNopMuon)
+                    </div>
+                </th>
+
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.DanhDauNopMuon)
+                        @Html.ValidationMessageFor(model => model.DanhDauNopMuon)
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <p>
+            <input type="submit" value="Tạo Bài Tập" />
+        </p>
+    </div>
+
+
+
+}

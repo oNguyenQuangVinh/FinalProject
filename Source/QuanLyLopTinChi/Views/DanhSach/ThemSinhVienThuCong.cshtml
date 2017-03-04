@@ -1,0 +1,128 @@
+﻿@model QuanLyLopTinChi.Models.NguoiDung
+
+@{
+    ViewBag.Title = "Thêm Sinh Viên Thủ Công";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(function () {
+            // Document.ready -> link up remove event handler
+            $(".RemoveLink").click(function () {
+                // Get the id from the link
+                var recordToDelete = $(this).attr("data-id");
+
+                if (recordToDelete != '') {
+
+                    // Perform the ajax post
+                    $.post("/DanhSach/XoaKhoiDanhSach", { "UserName": recordToDelete },
+                    function (data) {
+                        // Successful requests get here
+                        // Update the page elements
+                        $('#row-' + data.DeleteId).fadeOut('slow');
+                        if (data.ItemCount == 0) {
+                            $('#rowHeaderTable').fadeOut('slow');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+
+
+
+
+}
+<h2 class="name">
+    <span class="name_cont">
+        <a href="#">
+            Thêm Sinh Viên Vào Lớp
+        </a>
+    </span><span class="name_last">&nbsp;</span>
+</h2>
+
+<div class="bor pad-sml">
+    @using (Html.BeginForm("ThemSinhVienLe", "DanhSach", FormMethod.Post, new { id = "formSinhVienLe" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <h3 class="name">Chọn Sinh Viên</h3>
+
+        <table>
+            <tr>
+                <th>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.UserName)
+                    </div>
+                </th>
+
+                <td>
+                    <div class="editor-field">
+                        <input type="text" name="UserName" />
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <p>
+            <input type="submit" value="Tìm Kiếm" />
+        </p>
+    }
+</div>
+
+<div class="bor pad-sml">
+    <h3 class="name">Danh sách sinh viên đã chọn</h3>
+    <table>
+        <tr id="rowHeaderTable">
+            <th>
+                @Html.ActionLink("Mã Sinh Viên", "KetQuaThemVaoDanhSach", new { sortOrder = ViewBag.MaSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Họ Tên", "KetQuaThemVaoDanhSach", new { sortOrder = ViewBag.TenSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Ngày Sinh", "KetQuaThemVaoDanhSach", new { sortOrder = ViewBag.NgaySinhSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Lớp", "KetQuaThemVaoDanhSach", new { sortOrder = ViewBag.LopSortParm })
+            </th>
+            <th>
+                Tùy Chỉnh
+            </th>
+        </tr>
+
+        @foreach (var item in (List<QuanLyLopTinChi.Models.NguoiDung>)ViewBag.ListSinhVien)
+        {
+            <tr id="row-@item.UserName">
+                <td>
+                    @Html.ActionLink(item.UserName, "Details", "TaiLieu", new { id = item.IdNguoiDung }, null)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoTen)
+                </td>
+                <td>
+                    @item.NgaySinh
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DonViQuanLy.TenDonViQuanLy)
+                </td>
+                <td>
+                    <a href="#" class="RemoveLink" data-id="@item.UserName">Xóa khỏi danh sách</a>
+                </td>
+            </tr>
+        }
+    </table>
+
+
+    @using (Html.BeginForm("ThemSinhVienThuCong", "DanhSach", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div>
+            <input type="submit" value="Thêm Vào Lớp" />
+        </div>
+    }
+
+</div>

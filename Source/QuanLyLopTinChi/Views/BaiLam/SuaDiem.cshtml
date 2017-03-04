@@ -1,0 +1,92 @@
+﻿@model List<QuanLyLopTinChi.Models.BaiLam>
+
+@{
+    ViewBag.Title = "Sửa Điểm Bài Làm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="name">
+    <span class="name_cont">
+        <a href="#">
+            Sửa Điểm Bài Làm
+        </a>
+    </span><span class="name_last">&nbsp;</span>
+</h2>
+
+@using (Html.BeginForm("ChamBai", "BaiLam", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="bor pad-sml">
+
+        <h3 class="name">
+            Sửa Điểm
+        </h3>
+
+        <table>
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    @Html.ActionLink("Họ Tên", "Index", "BaiLam", new { sortOrder = ViewBag.TenSortParm }, null)
+                </th>
+                <th>
+                    @Html.ActionLink("Bài Làm", "Index", "BaiLam", new { sortOrder = ViewBag.BaiLamSortParm }, null)
+                </th>
+                <th>
+                    @Html.ActionLink("Ngày Nộp", "Index", "BaiLam", new { sortOrder = ViewBag.NgayNopSortParm }, null)
+                </th>
+                <th>
+                    @Html.ActionLink("Nộp Muộn", "Index", "BaiLam", new { sortOrder = ViewBag.LopSortParm }, null)
+                </th>
+                <th>
+                    @Html.ActionLink("Điểm", "Index", "BaiLam", new { sortOrder = ViewBag.DiemSortParm }, null)
+                </th>
+                <th>
+                    @Html.ActionLink("Nhận Xét", "Index", "BaiLam", new { sortOrder = ViewBag.NhanXetSortParm }, null)
+                </th>
+            </tr>
+
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                <tr>
+                    <td>
+                        @(i + 1)
+                        @Html.HiddenFor(modelItem => modelItem[i].IdNguoiDung)
+                        @Html.HiddenFor(modelItem => modelItem[i].IdBaiTap)
+                    </td>
+                    <td>
+                        @Model[i].NguoiDung.HoTen
+                    </td>
+                    <td>
+                        @Html.ActionLink(@Model[i].TaiLieu.TenTaiLieu,
+                            "DownloadTaiLieu",
+                            "TaiLieu",
+                         new { TenTaiLieu = @Model[i].TaiLieu.DuongDan },
+                            null)
+                    </td>
+                    <td>
+                        @Model[i].NgayNop.ToString("dd'/'MM'/'yyyy")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem[i].NopMuon)
+                        @Html.HiddenFor(modelItem => modelItem[i].NopMuon)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(modelItem => modelItem[i].Diem, new { style = "width: 40px;", @type = "number" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(modelItem => modelItem[i].NhanXet)
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </div>
+
+
+}
+
